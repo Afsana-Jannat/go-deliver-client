@@ -41,3 +41,5 @@ const Banner = () => {
 export default Banner;
 
 // https://v1.pinimg.com/videos/mc/720p/7e/fc/50/7efc5098698e67ea3f5ed914070b9001.mp4
+
+// https://www.shutterstock.com/shutterstock/videos/3521299445/preview/stock-footage-delivery-service-flat-design-animation-a-courier-delivers-the-package-to-its-destination-and-hands.webm
