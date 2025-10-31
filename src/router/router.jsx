@@ -1,3 +1,5 @@
+
+
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home/Home/Home";
@@ -5,7 +7,8 @@ import AuthLayout from "../AuthLayout/AuthLayout";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Coverage from "../pages/Coverage/Coverage";
-
+import PrivateRoute from "../routes/PrivateRoute";
+import SendParcel from "../pages/SendParcel/SendParcel";
 
 export const router = createBrowserRouter([
     {
@@ -14,27 +17,36 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Home
+                Component: Home,
             },
             {
-                path: 'coverage',
+                path: "coverage",
                 Component: Coverage,
-                loader: () => fetch('../../public/districtsData.json')
-            }
-        ]
+                loader: () => fetch("/districtsData.json"),
+            },
+            {
+                path: "sendParcel",
+                element: (
+                    <PrivateRoute>
+                        <SendParcel />
+                    </PrivateRoute>
+                ),
+                loader: () => fetch("/districtsData.json"),
+            },
+        ],
     },
     {
         path: "/",
         Component: AuthLayout,
         children: [
             {
-                path: 'login',
-                Component: Login
+                path: "login",
+                Component: Login,
             },
             {
-                path: 'register',
-                Component: Register
-            }
-        ]
+                path: "register",
+                Component: Register,
+            },
+        ],
     },
 ]);
