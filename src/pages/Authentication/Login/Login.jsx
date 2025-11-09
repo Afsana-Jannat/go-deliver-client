@@ -1,13 +1,55 @@
-import { useForm } from "react-hook-form";
+
 import { FiMail, FiLock } from "react-icons/fi";
 import { Link } from "react-router";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from 'react-router';
+import { useForm } from "react-hook-form";
+
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signIn } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation()
 
-    const onSubmit = data => {
-        console.log(data)
+    const onSubmit = (event) => {
+        console.log(event)
+
+        // get field values
+        const email = event.email;
+        const password = event.password;
+
+        console.log(email, password)
+
+        // validation
+        if (password.length < 6) {
+            Swal.fire('Password must be at 6 characters');
+            return;
+        }
+
+        // Check if the password contains at least one alphabet character (a-zA-Z)
+        if (!/[a-zA-Z]/.test(password)) {
+            return Swal.fire("password need at least 1 alphabet");
+        }
+
+        // Check if the password contains at least one symbol character
+        if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password)) {
+            return Swal.fire("password need at least 1 symbol");
+        }
+
+
+        signIn(email, password)
+            .then(() => {
+                Swal.fire("log in successs")
+
+                navigate(location?.state ? location.state : '/')
+            })
+
+            .catch(error => {
+                Swal.fire(error.message)
+            })
     }
 
     return (

@@ -3,12 +3,16 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home/Home/Home";
-import AuthLayout from "../AuthLayout/AuthLayout";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Coverage from "../pages/Coverage/Coverage";
 import PrivateRoute from "../routes/PrivateRoute";
 import SendParcel from "../pages/SendParcel/SendParcel";
+import AuthLayout from "../layout/AuthLayout/AuthLayout";
+import DashboardLayout from "../layout/DashboardLayout";
+import MyParcels from "../pages/DashBoardPages/MyParcels/MyParcels";
+import Payment from "../pages/DashBoardPages/Payment/Payment";
+import PaymentHistory from "../pages/DashBoardPages/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -49,4 +53,25 @@ export const router = createBrowserRouter([
             },
         ],
     },
+
+    {
+        path: '/dashBoard',
+        element: <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+        </PrivateRoute>,
+        children: [
+            {
+                path: "myParcels",
+                Component: MyParcels,
+            },
+            {
+                path: "payment/:parcelId",
+                Component: Payment,
+            },
+            {
+                path: "paymentHistory",
+                Component: PaymentHistory,
+            },
+        ]
+    }
 ]);

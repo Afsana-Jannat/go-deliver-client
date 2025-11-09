@@ -1,11 +1,10 @@
-
-
-
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import districtsData from "../../../public/districtsData.json";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SendParcel = () => {
     const {
@@ -14,6 +13,10 @@ const SendParcel = () => {
         watch,
         formState: { errors },
     } = useForm();
+
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
+
 
     const parcelType = watch("type");
     const senderRegion = watch("sender_region");
@@ -53,6 +56,7 @@ const SendParcel = () => {
             setReceiverDistricts(filtered);
         } else setReceiverDistricts([]);
     }, [receiverRegion, districts]);
+
 
     // 🔹 update sender areas
     useEffect(() => {
@@ -95,6 +99,14 @@ const SendParcel = () => {
 
         setTotalCost(cost);
     }, [parcelType, senderDistrict, receiverDistrict, weight]);
+
+
+    const generateTrackingID = () => {
+        const date = new Date();
+        const datePart = date.toISOString().split("T")[0].replace(/-/g, "");
+        const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
+        return `PCL-${datePart}-${rand}`
+    }
 
     // 🔹 Submit Handler with SweetAlert2
     const onSubmit = (data) => {
@@ -146,15 +158,27 @@ const SendParcel = () => {
                 const parcelData = {
                     ...data,
                     totalCost: total,
+                    created_by: user.email,
+                    payment_status: 'unpaid',
+                    delivery_status: 'not_collected',
+                    status: "pending",
+                    tracking_id: generateTrackingID(),
                     creation_date: new Date().toISOString(),
                 };
                 console.log("✅ Parcel saved:", parcelData);
-                Swal.fire("Success!", "Parcel information saved successfully!", "success");
-            } else {
-                Swal.fire("Edit Your Parcel", "You can modify the details now.", "info");
-            }
+
+                axiosSecure.post("/parcels", parcelData).then((res) => {
+                    if (res.data.insertedId) {
+                        Swal.fire("✅ Success!", "Parcel information saved successfully!", "success");
+                    } else {
+                        Swal.fire("Edit Your Parcel", "You can modify the details now.", "info");
+                    }
+                });
+            };
         });
     };
+
+
 
     return (
         <div className="max-w-5xl mx-auto bg-white shadow-xl p-10 rounded-3xl my-10 border border-gray-200">
@@ -403,3 +427,4 @@ const SendParcel = () => {
 };
 
 export default SendParcel;
+

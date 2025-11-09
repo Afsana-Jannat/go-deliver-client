@@ -1,10 +1,11 @@
-import { use } from 'react';
+// import { use } from 'react';
 import { Link, NavLink } from 'react-router';
-import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
+// import { AuthContext } from '../../../contexts/AuthContext/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
-    const { user, logOut } = use(AuthContext)
-    console.log(user)
+    // const { user, logOut } = use(AuthContext)
+    const { user, logOut } = useAuth()
 
     const handleSignOut = () => {
         logOut()
@@ -20,7 +21,12 @@ const Navbar = () => {
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/sendParcel">Send a Parcel</NavLink></li>
         <li><NavLink to="/coverage">Coverage</NavLink></li>
-        <li><NavLink>About Us</NavLink></li>
+
+        {
+            user && <>
+                <li><NavLink to="/dashBoard">Dashboard</NavLink></li>
+            </>
+        }
         <li><NavLink>Services</NavLink></li>
         <li><NavLink>Contact</NavLink></li>
     </>
