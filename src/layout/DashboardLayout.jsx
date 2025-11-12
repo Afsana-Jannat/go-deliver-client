@@ -1,8 +1,13 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { FiMenu, FiHome, FiPackage, FiLogOut, FiSend, FiAlertOctagon, } from "react-icons/fi";
+import { FiMenu, FiHome, FiPackage, FiLogOut, FiSend, FiAlertOctagon, FiUserCheck, FiPauseCircle, } from "react-icons/fi";
+import { FaUserShield } from "react-icons/fa";
+import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
+
+    const { role, roleLoading } = useUserRole();
+    console.log(role)
     return (
         <div className="drawer lg:drawer-open min-h-screen bg-base-100">
             {/* Toggle checkbox for drawer */}
@@ -67,8 +72,15 @@ const DashboardLayout = () => {
                     <li><Link to="/dashboard/"><FiHome /> Dashboard Home</Link></li>
                     <li><Link to="/dashboard/myParcels"><FiPackage /> My Parcels</Link></li>
                     <li><Link to="/dashboard/paymentHistory"><FiSend />Payment History</Link></li>
-                    <li><Link to="/dashboard/trackPackage"><FiAlertOctagon />Track a Package</Link></li>
-                    <li><a><FiLogOut /> Logout</a></li>
+                    <li><Link to="/dashboard/track"><FiAlertOctagon />Track a Package</Link></li>
+                    {!roleLoading && role === 'admin' &&
+                        <>
+                            <li><Link to="/dashboard/activeRiders"><FiUserCheck />Active Riders</Link></li>
+                            <li><Link to="/dashboard/pendingRiders"><FiPauseCircle />Pending Riders</Link></li>
+                            <li><Link to="/dashboard/makeAdmin"><FaUserShield />Make Admin</Link></li>
+                        </>
+                    }
+                    <li><Link to="/login"><FiLogOut /> Logout</Link></li>
 
                     <div className="mt-6 border-t border-gray-300 pt-4 text-xs text-gray-500 text-center">
                         © {new Date().getFullYear()} GoDeliver

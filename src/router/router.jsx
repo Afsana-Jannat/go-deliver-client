@@ -13,6 +13,13 @@ import DashboardLayout from "../layout/DashboardLayout";
 import MyParcels from "../pages/DashBoardPages/MyParcels/MyParcels";
 import Payment from "../pages/DashBoardPages/Payment/Payment";
 import PaymentHistory from "../pages/DashBoardPages/PaymentHistory/PaymentHistory";
+import TrackParcel from "../pages/DashBoardPages/TrackParcel/TrackParcel";
+import BeARider from "../pages/DashBoardPages/BeARider/BeARider";
+import PendingRiders from "../pages/DashBoardPages/PendingRiders/PendingRiders";
+import ActiveRiders from "../pages/DashBoardPages/ActiveRiders/ActiveRiders";
+import MakeAdmin from "../pages/DashBoardPages/MakeAdmin/MakeAdmin";
+import Forbidden from "../pages/Forbidden/Forbidden";
+import AdminRoute from "../routes/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +33,15 @@ export const router = createBrowserRouter([
             {
                 path: "coverage",
                 Component: Coverage,
+                loader: () => fetch("/districtsData.json"),
+            },
+            {
+                path: "forbidden",
+                Component: Forbidden,
+            },
+            {
+                path: 'beARider',
+                element: <PrivateRoute><BeARider></BeARider></PrivateRoute>,
                 loader: () => fetch("/districtsData.json"),
             },
             {
@@ -71,6 +87,22 @@ export const router = createBrowserRouter([
             {
                 path: "paymentHistory",
                 Component: PaymentHistory,
+            },
+            {
+                path: "track",
+                Component: TrackParcel,
+            },
+            {
+                path: "pendingRiders",
+                element: <AdminRoute><PendingRiders></PendingRiders></AdminRoute>
+            },
+            {
+                path: "activeRiders",
+                element: <AdminRoute><ActiveRiders></ActiveRiders></AdminRoute>
+            },
+            {
+                path: "makeAdmin",
+                element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
             },
         ]
     }
