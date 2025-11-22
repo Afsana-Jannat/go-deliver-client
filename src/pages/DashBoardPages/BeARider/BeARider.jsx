@@ -1,123 +1,102 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-
-import { useState } from "react";
-
-import { useLoaderData } from "react-router";
+import districtsData from "../../../../public/districtsData.json";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const BeARider = () => {
     const { user } = useAuth();
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm();
-
     const [selectedRegion, setSelectedRegion] = useState("");
-    const axiosSecure = useAxiosSecure();
+    const { register, handleSubmit, reset } = useForm();
 
-    const serviceCenters = useLoaderData();
+    // ✅ Unique region list
+    const regions = [...new Set(districtsData.map((d) => d.region))];
 
-    const regions = [...new Set(serviceCenters.map((s) => s.region))];
-    const districts = serviceCenters
-        .filter((s) => s.region === selectedRegion)
-        .map((s) => s.district);
+    // ✅ Districts for selected region
+    const filteredDistricts = districtsData.filter(
+        (d) => d.region === selectedRegion
+    );
 
     const onSubmit = async (data) => {
-        const riderData = {
-            ...data,
-            // name: user?.displayName || "",
-            email: user?.email || "",
-            status: "pending",
-            created_at: new Date().toISOString(),
-        };
+        data.status = "pending";
+        data.created_at = new Date().toISOString();
+        data.email = user?.email;
 
-        console.log("Rider Application:", riderData);
+        try {
+            const res = await fetch("http://localhost:5000/riders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
 
-        axiosSecure.post('/riders', riderData)
-            .then(res => {
-                if (res.data.insertedId) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Application Submitted!",
-                        text: "Your application is pending approval.",
-                    });
-                }
-            })
-
-
-
-        // Send to your backend here
-        reset();
+            if (res.ok) {
+                Swal.fire("Success!", "Your rider request has been submitted.", "success");
+                reset();
+                setSelectedRegion("");
+            } else {
+                Swal.fire("Error", "Failed to submit your request.", "error");
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire("Error", "Something went wrong.", "error");
+        }
     };
 
     return (
-        <div className="max-w-2xl mx-auto mt-4 mb-4 p-6 bg-base-100 rounded-xl shadow">
-            <h2 className="text-2xl font-bold mb-2">Become a Rider</h2>
-            <p className="text-gray-500 mb-6">Fill out the form to apply as a delivery rider.</p>
+        <div className="max-w-2xl mx-auto p-8 bg-white rounded-2xl shadow-lg">
+            <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+                Become a Rider
+            </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-1 gap-4">
-                    {/* Name (read-only) */}
-                    {/* <input
-                        type="text"
-                        value={user?.displayName || ""}
-                        readOnly
-                        className="input input-bordered text-black w-full bg-gray-100"
-                    /> */}
+                {/* Rider Name */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Full Name</label>
                     <input
                         type="text"
-                        placeholder="Your Name"
-                        className="input input-bordered w-full"
+                        placeholder="Enter your name"
                         {...register("name", { required: true })}
+                        className="input input-bordered w-full"
                     />
+                </div>
 
-                    {/* Email (read-only) */}
-                    <input
-                        type="email"
-                        value={user?.email || ""}
-                        readOnly
-                        className="input input-bordered text-black w-full bg-gray-100"
-                    />
-
-                    {/* Age */}
+                {/* Age */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Age</label>
                     <input
                         type="number"
-                        placeholder="Your Age"
+                        placeholder="Enter your age"
+                        {...register("age", { required: true })}
                         className="input input-bordered w-full"
-                        {...register("age", { required: true, min: 18 })}
                     />
-                    {errors.age && (
-                        <span className="text-red-500 text-sm">You must be 18 or older</span>
-                    )}
+                </div>
 
-                    {/* Phone */}
-                    <input
-                        type="tel"
-                        placeholder="Phone Number"
-                        className="input input-bordered w-full"
-                        {...register("phone", { required: true })}
-                    />
-                    {errors.phone && (
-                        <span className="text-red-500 text-sm">Phone number is required</span>
-                    )}
-
-                    {/* National ID */}
+                {/* Phone */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Phone</label>
                     <input
                         type="text"
-                        placeholder="National ID Card Number"
+                        placeholder="+8801XXXXXXXXX"
+                        {...register("phone", { required: true })}
                         className="input input-bordered w-full"
-                        {...register("nid", { required: true })}
                     />
-                    {errors.nid && (
-                        <span className="text-red-500 text-sm">NID is required</span>
-                    )}
+                </div>
 
-                    {/* Region */}
+                {/* NID */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">NID Number</label>
+                    <input
+                        type="text"
+                        placeholder="Enter your NID number"
+                        {...register("nid", { required: true })}
+                        className="input input-bordered w-full"
+                    />
+                </div>
+
+                {/* Region */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Region</label>
                     <select
                         className="select select-bordered w-full"
                         {...register("region", { required: true })}
@@ -130,55 +109,63 @@ const BeARider = () => {
                             </option>
                         ))}
                     </select>
-                    {errors.region && <span className="text-red-500 text-sm">Region is required</span>}
+                </div>
 
-                    {/* District */}
+                {/* District */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">District</label>
                     <select
                         className="select select-bordered w-full"
                         {...register("district", { required: true })}
                         disabled={!selectedRegion}
                     >
                         <option value="">Select District</option>
-                        {districts.map((district, idx) => (
-                            <option key={idx} value={district}>
-                                {district}
+                        {filteredDistricts.map((d, idx) => (
+                            <option key={idx} value={d.district}>
+                                {d.district}
                             </option>
                         ))}
                     </select>
-                    {errors.district && <span className="text-red-500 text-sm">District is required</span>}
+                </div>
 
-                    {/* Bike Brand */}
+                {/* Bike Brand */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Bike Brand</label>
                     <input
                         type="text"
-                        placeholder="Bike Brand (e.g., Yamaha FZ)"
-                        className="input input-bordered w-full"
+                        placeholder="Enter your bike brand"
                         {...register("bike_brand", { required: true })}
+                        className="input input-bordered w-full"
                     />
-                    {errors.bike_brand && (
-                        <span className="text-red-500 text-sm">Bike brand is required</span>
-                    )}
+                </div>
 
-                    {/* Bike Registration */}
+                {/* Bike Registration */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Bike Registration Number</label>
                     <input
                         type="text"
-                        placeholder="Bike Registration Number"
-                        className="input input-bordered w-full"
+                        placeholder="Enter registration number"
                         {...register("bike_registration", { required: true })}
+                        className="input input-bordered w-full"
                     />
-                    {errors.bike_registration && (
-                        <span className="text-red-500 text-sm">Registration number is required</span>
-                    )}
+                </div>
 
-                    {/* Additional Info (optional) */}
+                {/* Note */}
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Additional Note</label>
                     <textarea
-                        placeholder="Additional information (optional)"
-                        className="textarea textarea-bordered w-full"
+                        placeholder="Write something (optional)"
                         {...register("note")}
+                        className="textarea textarea-bordered w-full"
                     ></textarea>
                 </div>
 
-                <button type="submit" className="btn bg-[#235e98] text-white w-full mt-4">
-                    Submit Rider Application
+                {/* Submit Button */}
+                <button
+                    type="submit"
+                    className="btn bg-[#FF6F00] hover:bg-[#e65f00] text-white w-full"
+                >
+                    Submit Request
                 </button>
             </form>
         </div>

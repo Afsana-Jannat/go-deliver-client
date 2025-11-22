@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { FiMenu, FiHome, FiPackage, FiLogOut, FiSend, FiAlertOctagon, FiUserCheck, FiPauseCircle, } from "react-icons/fi";
-import { FaUserShield } from "react-icons/fa";
+import { FaMotorcycle, FaUserShield } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
@@ -69,12 +69,13 @@ const DashboardLayout = () => {
                         <p className="text-sm text-gray-500">Manage your parcels easily</p>
                     </div>
 
-                    <li><Link to="/dashboard/"><FiHome /> Dashboard Home</Link></li>
+                    <li><Link to="/"><FiHome /> Home</Link></li>
                     <li><Link to="/dashboard/myParcels"><FiPackage /> My Parcels</Link></li>
                     <li><Link to="/dashboard/paymentHistory"><FiSend />Payment History</Link></li>
                     <li><Link to="/dashboard/track"><FiAlertOctagon />Track a Package</Link></li>
                     {!roleLoading && role === 'admin' &&
                         <>
+                            <li><Link to="/dashboard/assignRider"><FaMotorcycle />Assign Rider</Link></li>
                             <li><Link to="/dashboard/activeRiders"><FiUserCheck />Active Riders</Link></li>
                             <li><Link to="/dashboard/pendingRiders"><FiPauseCircle />Pending Riders</Link></li>
                             <li><Link to="/dashboard/makeAdmin"><FaUserShield />Make Admin</Link></li>

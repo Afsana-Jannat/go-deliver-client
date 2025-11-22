@@ -20,6 +20,8 @@ import ActiveRiders from "../pages/DashBoardPages/ActiveRiders/ActiveRiders";
 import MakeAdmin from "../pages/DashBoardPages/MakeAdmin/MakeAdmin";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import AdminRoute from "../routes/AdminRoute";
+import AssignRider from "../pages/DashBoardPages/AssignRider/AssignRider";
+import Contact from "../pages/Contact/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +36,10 @@ export const router = createBrowserRouter([
                 path: "coverage",
                 Component: Coverage,
                 loader: () => fetch("/districtsData.json"),
+            },
+            {
+                path: "contact",
+                Component: Contact
             },
             {
                 path: "forbidden",
@@ -91,6 +97,10 @@ export const router = createBrowserRouter([
             {
                 path: "track",
                 Component: TrackParcel,
+            },
+            {
+                path: 'assignRider',
+                element: <AdminRoute><AssignRider></AssignRider></AdminRoute>
             },
             {
                 path: "pendingRiders",

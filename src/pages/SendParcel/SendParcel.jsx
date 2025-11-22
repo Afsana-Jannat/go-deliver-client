@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
 
 const SendParcel = () => {
     const {
@@ -15,7 +16,8 @@ const SendParcel = () => {
     } = useForm();
 
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
 
     const parcelType = watch("type");
@@ -170,9 +172,11 @@ const SendParcel = () => {
                 axiosSecure.post("/parcels", parcelData).then((res) => {
                     if (res.data.insertedId) {
                         Swal.fire("✅ Success!", "Parcel information saved successfully!", "success");
-                    } else {
-                        Swal.fire("Edit Your Parcel", "You can modify the details now.", "info");
                     }
+                    navigate('/dashBoard/myParcels')
+                    // else {
+                    //     Swal.fire("Edit Your Parcel", "You can modify the details now.", "info");
+                    // }
                 });
             };
         });
