@@ -20,7 +20,7 @@ const PaymentForm = () => {
     const { isPending, data: parcelInfo = {} } = useQuery({
         queryKey: ['parcels', parcelId],
         queryFn: async () => {
-            const res = await axiosSecure.get(`http://localhost:5000/parcels/${parcelId}`);
+            const res = await axiosSecure.get(`https://go-deliver-server.vercel.app/parcels/${parcelId}`);
             return res.data;
         }
     })

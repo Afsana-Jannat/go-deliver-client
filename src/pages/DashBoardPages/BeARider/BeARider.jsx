@@ -24,7 +24,7 @@ const BeARider = () => {
         data.email = user?.email;
 
         try {
-            const res = await fetch("http://localhost:5000/riders", {
+            const res = await fetch("https://go-deliver-server.vercel.app/riders", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
