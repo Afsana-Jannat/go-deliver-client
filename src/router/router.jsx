@@ -13,7 +13,6 @@ import DashboardLayout from "../layout/DashboardLayout";
 import MyParcels from "../pages/DashBoardPages/MyParcels/MyParcels";
 import Payment from "../pages/DashBoardPages/Payment/Payment";
 import PaymentHistory from "../pages/DashBoardPages/PaymentHistory/PaymentHistory";
-import TrackParcel from "../pages/DashBoardPages/TrackParcel/TrackParcel";
 import BeARider from "../pages/DashBoardPages/BeARider/BeARider";
 import PendingRiders from "../pages/DashBoardPages/PendingRiders/PendingRiders";
 import ActiveRiders from "../pages/DashBoardPages/ActiveRiders/ActiveRiders";
@@ -22,6 +21,13 @@ import Forbidden from "../pages/Forbidden/Forbidden";
 import AdminRoute from "../routes/AdminRoute";
 import AssignRider from "../pages/DashBoardPages/AssignRider/AssignRider";
 import Contact from "../pages/Contact/Contact";
+import DashboardHome from "../pages/DashBoardPages/DashboardHome";
+import RiderRoute from "../routes/riderRoute";
+import PendingDeliveries from "../pages/DashBoardPages/PendingDeliveries/PendingDeliveries";
+import CompletedDeliveries from "../pages/DashBoardPages/CompletedDeliveries/CompletedDeliveries";
+import MyEarnings from "../pages/DashBoardPages/MyEarnings/MyEarnings";
+import TrackPickup from "../pages/DashBoardPages/TrackPickup/TrackPickup";
+import ParcelTracking from "../pages/DashBoardPages/ParcelTracking/ParcelTracking";
 
 export const router = createBrowserRouter([
     {
@@ -76,12 +82,40 @@ export const router = createBrowserRouter([
         ],
     },
 
+    // rider route
+    {
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
+            {
+                path: "pending-deliveries",
+                element: <RiderRoute><PendingDeliveries /></RiderRoute>
+            },
+            {
+                path: "completed-deliveries",
+                element: <RiderRoute><CompletedDeliveries /></RiderRoute>
+            },
+            {
+                path: "my-earnings",
+                element: <RiderRoute><MyEarnings /></RiderRoute>
+            }
+        ]
+    },
+
+
+
+    // admin route
+
     {
         path: '/dashBoard',
         element: <PrivateRoute>
             <DashboardLayout></DashboardLayout>
         </PrivateRoute>,
         children: [
+            {
+                index: true,
+                Component: DashboardHome
+            },
             {
                 path: "myParcels",
                 Component: MyParcels,
@@ -95,8 +129,12 @@ export const router = createBrowserRouter([
                 Component: PaymentHistory,
             },
             {
-                path: "track",
-                Component: TrackParcel,
+                path: "track-pickup",
+                Component: TrackPickup,
+            },
+            {
+                path: "parcel-tracking",
+                Component: ParcelTracking,
             },
             {
                 path: 'assignRider',

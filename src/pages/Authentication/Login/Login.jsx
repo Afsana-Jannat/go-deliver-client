@@ -147,7 +147,7 @@ const Login = () => {
         signIn(email, password)
             .then(() => {
                 Swal.fire("Demo Login Successful");
-                navigate(location?.state ? location.state : "/dashboard");
+                window.open(location?.state ? location.state : "/dashboard", "_self");
             })
             .catch(error => Swal.fire(error.message));
     };

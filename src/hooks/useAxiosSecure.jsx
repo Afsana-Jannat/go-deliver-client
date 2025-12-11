@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
-    baseURL: `https://go-deliver-server.vercel.app/`
+    baseURL: `${import.meta.env.VITE_BASE_URL}/`
 })
 
 const useAxiosSecure = () => {

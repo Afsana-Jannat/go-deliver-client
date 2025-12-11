@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { FiMenu, FiHome, FiPackage, FiLogOut, FiSend, FiAlertOctagon, FiUserCheck, FiPauseCircle, } from "react-icons/fi";
-import { FaMotorcycle, FaUserShield } from "react-icons/fa";
+import { FaCheckCircle, FaMotorcycle, FaTasks, FaUserShield, FaWallet } from "react-icons/fa";
 import useUserRole from "../hooks/useUserRole";
 
 const DashboardLayout = () => {
@@ -72,7 +72,18 @@ const DashboardLayout = () => {
                     <li><Link to="/"><FiHome /> Home</Link></li>
                     <li><Link to="/dashboard/myParcels"><FiPackage /> My Parcels</Link></li>
                     <li><Link to="/dashboard/paymentHistory"><FiSend />Payment History</Link></li>
-                    <li><Link to="/dashboard/track"><FiAlertOctagon />Track a Package</Link></li>
+                    <li><Link to="/dashboard/track-pickup"><FiAlertOctagon />Track a Packup</Link></li>
+                    <li><Link to="/dashboard/parcel-tracking"><FiAlertOctagon />Parcel Tracking</Link></li>
+
+                    {/* rider links */}
+                    {
+                        !roleLoading && role === 'rider' && <>
+                            <li><Link to="/dashboard/pending-deliveries"><FaTasks />Pending Deliveries</Link></li>
+                            <li><Link to="/dashboard/completed-deliveries"><FaCheckCircle />Completed Deliveries</Link></li>
+                            <li><Link to="/dashboard/my-earnings"><FaWallet />My Earnings</Link></li>                        </>
+                    }
+
+                    {/* admin link */}
                     {!roleLoading && role === 'admin' &&
                         <>
                             <li><Link to="/dashboard/assignRider"><FaMotorcycle />Assign Rider</Link></li>
