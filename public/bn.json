@@ -1,0 +1,23 @@
+{
+  "appName": "গোডেলিভার",
+  "welcome": "স্বাগতম",
+  "login": "লগইন",
+  "logout": "লগআউট",
+  "signup": "সাইন আপ",
+  "email": "ইমেইল",
+  "password": "পাসওয়ার্ড",
+  "forgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
+  "trackParcel": "পার্সেল ট্র্যাক করুন",
+  "bookParcel": "পার্সেল বুক করুন",
+  "pickupAddress": "পিকআপ ঠিকানা",
+  "deliveryAddress": "ডেলিভারি ঠিকানা",
+  "parcelSize": "পার্সেলের সাইজ",
+  "parcelType": "পার্সেলের ধরন",
+  "cod": "ক্যাশ অন ডেলিভারি",
+  "prepaid": "প্রিপেইড",
+  "submit": "সাবমিট",
+  "dashboard": "ড্যাশবোর্ড",
+  "totalParcels": "মোট পার্সেল",
+  "inTransit": "চলমান",
+  "delivered": "ডেলিভার্ড"
+}

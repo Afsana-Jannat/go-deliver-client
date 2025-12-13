@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import AuthProvider from './contexts/AuthProvider/AuthProvider.jsx';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Aos from 'aos';
-
+import "./i18n";
 
 Aos.init();
 const queryClient = new QueryClient();

@@ -74,13 +74,15 @@ const DashboardLayout = () => {
                     <li><Link to="/dashboard/paymentHistory"><FiSend />Payment History</Link></li>
                     <li><Link to="/dashboard/track-pickup"><FiAlertOctagon />Track a Packup</Link></li>
                     <li><Link to="/dashboard/parcel-tracking"><FiAlertOctagon />Parcel Tracking</Link></li>
-
                     {/* rider links */}
                     {
                         !roleLoading && role === 'rider' && <>
                             <li><Link to="/dashboard/pending-deliveries"><FaTasks />Pending Deliveries</Link></li>
                             <li><Link to="/dashboard/completed-deliveries"><FaCheckCircle />Completed Deliveries</Link></li>
-                            <li><Link to="/dashboard/my-earnings"><FaWallet />My Earnings</Link></li>                        </>
+                            <li><Link to="/dashboard/my-earnings"><FaWallet />My Earnings</Link></li>
+                            <li><Link to="/dashboard/pickup"><FiAlertOctagon />PickUp Scan</Link></li>
+
+                        </>
                     }
 
                     {/* admin link */}
@@ -90,6 +92,7 @@ const DashboardLayout = () => {
                             <li><Link to="/dashboard/activeRiders"><FiUserCheck />Active Riders</Link></li>
                             <li><Link to="/dashboard/pendingRiders"><FiPauseCircle />Pending Riders</Link></li>
                             <li><Link to="/dashboard/makeAdmin"><FaUserShield />Make Admin</Link></li>
+                            <li><Link to="/dashboard/bookParcel"><FaUserShield />Book Parcel</Link></li>
                         </>
                     }
                     <li><Link to="/login"><FiLogOut /> Logout</Link></li>

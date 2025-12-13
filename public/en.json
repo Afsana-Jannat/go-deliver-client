@@ -1,0 +1,23 @@
+{
+  "appName": "GoDeliver",
+  "welcome": "Welcome",
+  "login": "Login",
+  "logout": "Logout",
+  "signup": "Sign Up",
+  "email": "Email",
+  "password": "Password",
+  "forgotPassword": "Forgot Password?",
+  "trackParcel": "Track Parcel",
+  "bookParcel": "Book Parcel",
+  "pickupAddress": "Pickup Address",
+  "deliveryAddress": "Delivery Address",
+  "parcelSize": "Parcel Size",
+  "parcelType": "Parcel Type",
+  "cod": "Cash on Delivery",
+  "prepaid": "Prepaid",
+  "submit": "Submit",
+  "dashboard": "Dashboard",
+  "totalParcels": "Total Parcels",
+  "inTransit": "In Transit",
+  "delivered": "Delivered"
+}

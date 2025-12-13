@@ -28,6 +28,9 @@ import CompletedDeliveries from "../pages/DashBoardPages/CompletedDeliveries/Com
 import MyEarnings from "../pages/DashBoardPages/MyEarnings/MyEarnings";
 import TrackPickup from "../pages/DashBoardPages/TrackPickup/TrackPickup";
 import ParcelTracking from "../pages/DashBoardPages/ParcelTracking/ParcelTracking";
+import BookParcel from "../pages/DashBoardPages/BookParcel/BookParcel";
+import ParcelDetails from "../pages/DashBoardPages/MyParcels/ParcelDetails";
+import PickupScan from "../pages/DashBoardPages/PickupScan/PickupScan";
 
 export const router = createBrowserRouter([
     {
@@ -98,7 +101,11 @@ export const router = createBrowserRouter([
             {
                 path: "my-earnings",
                 element: <RiderRoute><MyEarnings /></RiderRoute>
-            }
+            },
+            {
+                path: "pickup/:trackingId",
+                element: <RiderRoute><PickupScan></PickupScan></RiderRoute>
+            },
         ]
     },
 
@@ -119,6 +126,10 @@ export const router = createBrowserRouter([
             {
                 path: "myParcels",
                 Component: MyParcels,
+            },
+            {
+                path: "parcels/:id",
+                element: <ParcelDetails></ParcelDetails>
             },
             {
                 path: "payment/:parcelId",
@@ -147,6 +158,10 @@ export const router = createBrowserRouter([
             {
                 path: "activeRiders",
                 element: <AdminRoute><ActiveRiders></ActiveRiders></AdminRoute>
+            },
+            {
+                path: "bookParcel",
+                element: <AdminRoute><BookParcel></BookParcel></AdminRoute>
             },
             {
                 path: "makeAdmin",
