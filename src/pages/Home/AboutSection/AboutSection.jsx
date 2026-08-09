@@ -44,9 +44,9 @@ const AboutSection = () => {
     return (
         <div className="mt-6 mb-8 grid md:grid-cols-2 sm:grid-cols-1 gap-12 max-w-3xl mx-auto">
             <div>
-                <img src="/public/img1..png" alt="" />
-                <img className="md:ml-[-40px] md:-mt-10" src="/public/shape.png" alt="" />
-                <img className="md:ml-72 md:-mt-40 hidden sm:block" src="/public/img2..png" alt="" />
+                <img src="https://www.wowtheme7.com/tf/transpro/assets/img/about/1.png" alt="" />
+                <img className="md:ml-[-40px] md:-mt-10" src="https://www.wowtheme7.com/tf/transpro/assets/img/about/shape.png" alt="" />
+                <img className="md:ml-72 md:-mt-40 hidden sm:block" src="https://www.wowtheme7.com/tf/transpro/assets/img/about/2.png" alt="" />
             </div>
 
             <div>
@@ -78,7 +78,7 @@ const AboutSection = () => {
                     </div>
 
                     <div>
-                        <img src="/public/img3..png" alt="" />
+                        <img src="https://www.wowtheme7.com/tf/transpro/assets/img/about/3.png" alt="" />
                     </div>
                 </div>
             </div>
