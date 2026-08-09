@@ -1,57 +1,241 @@
 import React from 'react';
+import {
+  FiFacebook,
+  FiYoutube,
+  FiLinkedin,
+  FiTwitter,
+  FiArrowUpRight,
+  FiMapPin,
+  FiPhone,
+  FiMail,
+  FiTruck,
+} from 'react-icons/fi';
 
 const Footer = () => {
-    return (
-        <footer className="footer footer-horizontal footer-center bg-gradient-to-t from-[#0D47A1] to-[#1976D2]
- text-gray-100 shadow-[0_-2px_10px_rgba(0,0,0,0.3)] rounded p-6">
-            <aside>
-                <img className='w-28 h-28' src="https://cdn-icons-png.flaticon.com/512/10053/10053703.png" alt="" />
-                <p className="font-bold mb-2">
-                    GoDeliver
-                    <br />
-                    Providing reliable tech since 1992
+  return (
+    <footer className="relative overflow-hidden bg-[#031524] text-white">
+      {/* =====================================================
+          BACKGROUND DECORATION
+      ====================================================== */}
+
+      <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-blue-500/[0.08] blur-3xl" />
+
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-orange-500/[0.07] blur-3xl" />
+
+      {/* =====================================================
+          MAIN FOOTER
+      ====================================================== */}
+
+      <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8 lg:px-10">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+          {/* =================================================
+              BRAND
+          ================================================== */}
+
+          <div className="max-w-sm">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 shadow-[0_10px_30px_rgba(249,115,22,0.2)]">
+                <FiTruck className="text-xl text-white" />
+              </div>
+
+              <div>
+                <h2 className="text-xl font-black tracking-tight">
+                  Go<span className="text-orange-400">Deliver</span>
+                </h2>
+
+                <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/35">
+                  Move with confidence
                 </p>
-                <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
-            </aside>
-            <nav>
-                <div className="grid grid-flow-col gap-4">
-                    <a>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="fill-current">
-                            <path
-                                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-                        </svg>
-                    </a>
-                    <a>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="fill-current">
-                            <path
-                                d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                        </svg>
-                    </a>
-                    <a>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="fill-current">
-                            <path
-                                d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-                        </svg>
-                    </a>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="mt-6 text-sm leading-7 text-white/45">
+              Fast, secure and reliable parcel delivery across Bangladesh.
+              GoDeliver makes every delivery simple, transparent and
+              stress-free.
+            </p>
+
+            {/* Social */}
+            <div className="mt-7 flex items-center gap-2.5">
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-white/50 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-blue-500/10 hover:text-blue-400"
+              >
+                <FiFacebook className="text-sm" />
+              </a>
+
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-white/50 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/30 hover:bg-sky-500/10 hover:text-sky-400"
+              >
+                <FiTwitter className="text-sm" />
+              </a>
+
+              <a
+                href="#"
+                aria-label="YouTube"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-white/50 transition-all duration-300 hover:-translate-y-1 hover:border-red-400/30 hover:bg-red-500/10 hover:text-red-400"
+              >
+                <FiYoutube className="text-sm" />
+              </a>
+
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-white/50 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-blue-500/10 hover:text-blue-400"
+              >
+                <FiLinkedin className="text-sm" />
+              </a>
+            </div>
+          </div>
+
+          {/* =================================================
+              QUICK LINKS
+          ================================================== */}
+
+          <div>
+            <h3 className="text-sm font-bold text-white">Quick Links</h3>
+
+            <div className="mt-5 space-y-3">
+              {['Home', 'About Us', 'Services', 'How It Works'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="group flex w-fit items-center gap-1.5 text-sm text-white/45 transition-colors duration-300 hover:text-orange-400"
+                >
+                  <span>{item}</span>
+
+                  <FiArrowUpRight className="text-[11px] opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* =================================================
+              SERVICES
+          ================================================== */}
+
+          <div>
+            <h3 className="text-sm font-bold text-white">Our Services</h3>
+
+            <div className="mt-5 space-y-3">
+              {[
+                'Express Delivery',
+                'Nationwide Delivery',
+                'Cash on Delivery',
+                'Corporate Delivery',
+              ].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="group flex w-fit items-center gap-1.5 text-sm text-white/45 transition-colors duration-300 hover:text-orange-400"
+                >
+                  <span>{item}</span>
+
+                  <FiArrowUpRight className="text-[11px] opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* =================================================
+              CONTACT
+          ================================================== */}
+
+          <div>
+            <h3 className="text-sm font-bold text-white">Get in Touch</h3>
+
+            <div className="mt-5 space-y-4">
+              {/* Location */}
+              <div className="flex gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] text-orange-400">
+                  <FiMapPin className="text-sm" />
                 </div>
-            </nav>
-        </footer>
-    );
+
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/25">
+                    Location
+                  </p>
+
+                  <p className="mt-1 text-sm text-white/50">
+                    Dhaka, Bangladesh
+                  </p>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="flex gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] text-orange-400">
+                  <FiPhone className="text-sm" />
+                </div>
+
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/25">
+                    Phone
+                  </p>
+
+                  <p className="mt-1 text-sm text-white/50">+880 1XXX-XXXXXX</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] text-orange-400">
+                  <FiMail className="text-sm" />
+                </div>
+
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-white/25">
+                    Email
+                  </p>
+
+                  <p className="mt-1 text-sm text-white/50">
+                    support@godeliver.com
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =====================================================
+            DIVIDER
+        ====================================================== */}
+
+        <div className="my-10 h-px bg-gradient-to-r from-transparent via-white/[0.10] to-transparent" />
+
+        {/* =====================================================
+            BOTTOM BAR
+        ====================================================== */}
+
+        <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+          <p className="text-xs text-white/30">
+            © {new Date().getFullYear()} GoDeliver. All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-5">
+            <a
+              href="#"
+              className="text-xs text-white/30 transition-colors hover:text-white/70"
+            >
+              Privacy Policy
+            </a>
+
+            <a
+              href="#"
+              className="text-xs text-white/30 transition-colors hover:text-white/70"
+            >
+              Terms & Conditions
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

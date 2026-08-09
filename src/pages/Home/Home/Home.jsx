@@ -10,19 +10,19 @@ import Testimonials from '../Testimonials/Testimonials';
 import QuestionArea from '../QuestionArea/QuestionArea';
 
 const Home = () => {
-    return (
-        <div>
-            <Banner></Banner>
-            <HowWorks></HowWorks>
-            <AboutSection></AboutSection>
-            <ServicesSection></ServicesSection>
-            <ClientsSection></ClientsSection>
-            <HomepageChoose></HomepageChoose>
-            <BeMerchant></BeMerchant>
-            <Testimonials></Testimonials>
-            <QuestionArea></QuestionArea>
-        </div>
-    );
+  return (
+    <div className="pt-[72px]">
+      <Banner></Banner>
+      <HowWorks></HowWorks>
+      <AboutSection></AboutSection>
+      <ServicesSection></ServicesSection>
+      <ClientsSection></ClientsSection>
+      <HomepageChoose></HomepageChoose>
+      <BeMerchant></BeMerchant>
+      <Testimonials></Testimonials>
+      <QuestionArea></QuestionArea>
+    </div>
+  );
 };
 
 export default Home;
