@@ -113,15 +113,14 @@ const Banner = () => {
               </Link>
 
               {/* Secondary CTA */}
-              <Link
-                to="/tracking"
+              <button
                 className="group/track inline-flex items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/[0.055] px-7 py-3.5 text-sm font-semibold text-white/90 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/[0.09]"
               >
                 <span className="flex h-5 w-5 items-center justify-center rounded-full border border-blue-300/30 text-blue-300 transition-transform duration-300 group-hover/track:scale-110">
                   <MapPin className="h-3 w-3" />
                 </span>
                 Track Parcel
-              </Link>
+              </button>
             </div>
 
             {/* Trust Points */}
